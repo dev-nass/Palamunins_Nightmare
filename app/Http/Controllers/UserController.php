@@ -21,7 +21,11 @@ class UserController
             'email' => 'tampol@gmail.com'
         ])->get();
 
-        dd($users[0]['email']);
+        $email = $users[0]['email'];
+
+        return view('index.view.php', [
+            'email' => $email
+        ]);
     }
 
 
