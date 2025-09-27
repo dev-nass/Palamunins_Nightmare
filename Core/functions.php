@@ -10,6 +10,14 @@ function dd($msg)
     die();
 }
 
+/**
+ * don't understood the path, /.../, provided yet
+ */
+function urlIs($path)
+{
+    return $_SERVER['REQUEST_URI'] === `/.../.../public/index.php/{$path}`;
+}
+
 
 function base_path($path)
 {

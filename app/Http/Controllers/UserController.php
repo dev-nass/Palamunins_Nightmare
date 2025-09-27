@@ -17,14 +17,11 @@ class UserController
     public function index()
     {
 
-        $users = $this->database->query("SELECT * FROM users WHERE email = :email", [
-            'email' => 'tampol@gmail.com'
-        ])->get();
+        $users = $this->database->query("SELECT * FROM users LIMIT 10")->get();
 
-        $email = $users[0]['email'];
 
         return view('index.view.php', [
-            'email' => $email
+            'users' => $users
         ]);
     }
 

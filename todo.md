@@ -1,4 +1,4 @@
-- [ ] Create your first view
+- [x] Create your first view
 - [ ] Create validation classes
-- [ ] Create view template so we can just `require` them
+- [x] Create view template so we can just `require` them
 - [ ] Create Login and Registration
