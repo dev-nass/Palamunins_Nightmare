@@ -31,7 +31,6 @@ class Router
     public function find_route($method, $uri)
     {
 
-
         foreach ($this->routes as $route) {
 
             if ($route['method'] === $method && $route['uri'] === $uri) {

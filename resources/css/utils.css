@@ -1,0 +1,22 @@
+.pm-container {
+  max-width: 85rem; /* same as max-w-[85rem] */
+  margin: auto;
+  padding-left: 1rem; /* px-4 → 16px */
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  /* sm: breakpoint */
+  .pm-container {
+    padding-left: 1.5rem; /* sm:px-6 → 24px */
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* lg: breakpoint */
+  .pm-container {
+    padding-left: 2rem; /* lg:px-8 → 32px */
+    padding-right: 2rem;
+  }
+}

@@ -17,12 +17,7 @@ class UserController
     public function index()
     {
 
-        $users = $this->database->query("SELECT * FROM users LIMIT 10")->get();
-
-
-        return view('index.view.php', [
-            'users' => $users
-        ]);
+        return view('user/homepage.view.php');
     }
 
 
