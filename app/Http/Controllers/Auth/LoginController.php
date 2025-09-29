@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Core\Database;
 use Core\Session;
+use Core\Authenticator;
 
 class LoginController
 {
@@ -22,31 +23,13 @@ class LoginController
 
     public function store()
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $credentials = array_merge($_POST);
 
-        $user = $this->database->query("SELECT * FROM users WHERE email = :email", [
-            'email' => $email,
-        ])->find();
+        $attempt = Authenticator::attempt($credentials);
 
-
-        if (empty($user)) {
-            Session::set('__flash', [
-                'email' => 'Account does not exist'
-            ]);
-
+        if (!$attempt) {
             return redirect('login');
         }
-
-        if (!password_verify($password, $user['password'])) {
-            Session::set('__flash', [
-                'password' => 'Incorrect password'
-            ]);
-
-            return redirect('login');
-        }
-
-        $_SESSION['__credentials'] = $user;
 
         return redirect('homepage');
 

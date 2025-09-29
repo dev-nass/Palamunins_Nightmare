@@ -1,0 +1,57 @@
+<?php
+
+namespace Core;
+
+use Core\Database;
+use Core\Session;
+
+class Authenticator
+{
+
+    protected static $database;
+
+    public static function init()
+    {
+        static::$database = new Database();
+    }
+
+
+    public static function attempt($credentials)
+    {
+
+        static::init();
+
+
+        $user = static::$database->query("SELECT * FROM users WHERE email = :email", [
+            'email' => $credentials['email']
+        ])->find();
+
+        if (empty($user)) {
+
+            Session::set('__flash', [
+                'email' => 'Account does not exist'
+            ]);
+
+            return false;
+        }
+
+
+        if (!password_verify($credentials['password'], $user['password'])) {
+            Session::set('__flash', [
+                'password' => 'Incorrect password'
+            ]);
+
+            return false;
+        }
+
+        $_SESSION['__credentials'] = [
+            'id' => $user['id'],
+            'email' => $user['email'],
+            'role' => $user['role'] ?? null
+        ];
+
+        return true;
+
+    }
+
+}
