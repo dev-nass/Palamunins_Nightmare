@@ -2,8 +2,10 @@
 - [ ] Create validation classes
 - [x] Create view template so we can just `require` them
 - [ ] Create Login and Registration
-  - [ ] Create Registration
+  - [x] Create Registration
   - [ ]
+- [ ] Create Authenticator class
+- [ ] Create Controller class
 
 Sep 28
 

@@ -3,7 +3,7 @@
 <section class="pm-container">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
 
-        <h1>Hello There from HomePage here</h1>
+        <h1>Hello There from HomePage here, <?= $_SESSION['__credentials']['email'] ?? "Guest" ?></h1>
 
     </div>
 </section>

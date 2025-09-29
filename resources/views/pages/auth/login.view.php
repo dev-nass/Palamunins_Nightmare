@@ -1,14 +1,18 @@
 <?php require_once base_path('resources/views/layouts/user/header.php') ?>
 
 <section class="pm-container  pt-[10rem]">
-    <form class=" grid grid-cols-1 items-center gap-3 max-w-[30rem] mx-auto">
+    <form class=" grid grid-cols-1 items-center gap-3 max-w-[30rem] mx-auto" method="POST" action="../user/login">
         <h1 class="text-3xl font-bold text-center mb-3">Login Page</h1>
         <div class="space-y-12">
             <div class="sm:col-span-4">
-                <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
+                <label for="email" class="block text-sm/6 font-medium text-gray-900">Email </label>
                 <div class="mt-2">
                     <input id="email" type="email" name="email" autocomplete="email"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                </div>
+
+                <div>
+                    <p class="text-sm text-red-500 italic mt-2"><?= $_SESSION['__flash']['email'] ?? '' ?></p>
                 </div>
             </div>
 
@@ -17,6 +21,9 @@
                 <div class="mt-2">
                     <input id="password" type="password" name="password" autocomplete="password"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                </div>
+                <div>
+                    <p class="text-sm text-red-500 italic mt-2"><?= $_SESSION['__flash']['password'] ?? '' ?></p>
                 </div>
             </div>
 

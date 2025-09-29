@@ -8,16 +8,16 @@ use Core\Database;
 class RegistrationController
 {
 
-    protected $db;
+    protected $databas;
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->databas = new Database();
     }
 
     public function create()
     {
-        return view('user/homepage.view.php');
+        return view('auth/registration.view.php');
     }
 
     public function store()
@@ -43,7 +43,7 @@ class RegistrationController
             return redirect('registration');
         }
 
-        $this->db->query('INSERT INTO users (email, password) VALUE (:email, :password)', [
+        $this->databas->query('INSERT INTO users (email, password) VALUE (:email, :password)', [
             'email' => $email,
             'password' => password_hash($password, PASSWORD_BCRYPT)
         ]);
