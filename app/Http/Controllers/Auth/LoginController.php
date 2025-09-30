@@ -34,4 +34,11 @@ class LoginController
         return redirect('homepage');
 
     }
+
+    public function destroy()
+    {
+        Authenticator::logout();
+
+        return redirect('homepage');
+    }
 }
