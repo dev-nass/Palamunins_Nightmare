@@ -11,21 +11,19 @@ class Validator
     public $mod_field_name; // used for showing error messages; So contact_number will be 'Contact number incorrect'
 
 
-    public function __construct($data, $input, $mod_field_name)
+    public function __construct($data, $input_name, $mod_field_name)
     {
         $this->data = $data;
-        $this->input = $input;
+        $this->input_name = $input_name;
         $this->mod_field_name = $mod_field_name;
     }
 
     public function required()
     {
-
-        if (!isset($this->data[$this->input_name])) {
+        if (!isset($this->data[$this->input_name]) || $this->data[$this->input_name] === '') {
             return
                 $this->errors[$this->input_name][] = ucfirst("$this->mod_field_name is required");
         }
-
 
         return true;
     }

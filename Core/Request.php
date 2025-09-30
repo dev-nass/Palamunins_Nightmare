@@ -37,14 +37,15 @@ class Request
         $errors = [];
 
         foreach ($rules as $input_name => $rule_set) {
+
+            $mod_input_name = str_replace('_', ' ', $input_name);
+            $validator = new Validator($data, $input_name, $mod_input_name);
+
             foreach (explode('|', $rule_set) as $rule) {
 
-                $mod_input_name = str_replace('_', ' ', $input_name);
-
-                $validator = new Validator($data, $input_name, $mod_input_name);
-
                 if ($rule === 'required') {
-                    $errors[$input_name][] = $validator->required();
+                    if ($result !== true)
+                        $errors[$input_name][] = $result;
                 }
 
                 if ($rule === 'email') {
@@ -61,10 +62,12 @@ class Request
 
         Session::set('__flash', $flashData);
 
-        if (isset($errors)) {
-            dd($_SESSION);
+
+        if (is_array($errors) && count($errors) > 0) {
+            return redirect($_SERVER['HTTP_REFERER']);
         }
 
-        return;
+
+        return $data;
     }
 }
