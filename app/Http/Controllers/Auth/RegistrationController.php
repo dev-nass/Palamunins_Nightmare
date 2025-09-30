@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Core\Controller;
+use Core\Request;
 use Core\Session;
 use Core\Database;
 
-class RegistrationController
+class RegistrationController extends Controller
 {
 
     protected $databas;
@@ -22,9 +24,23 @@ class RegistrationController
 
     public function store()
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $password_confirmation = $_POST['password_confirmation'];
+
+        $request = new Request();
+
+        // $email = $this->request('email');
+        // $password = $this->request('password');
+        // $password_confirmation = $this->request('password_confirmation');
+
+        // $data = $this->request()->validate([
+        //     'email' => 'required|email'
+        // ]);
+
+        $data = $request->validate([
+            'password' => 'required'
+        ]);
+
+        dd($data);
+
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
