@@ -44,14 +44,33 @@ class Authenticator
             return false;
         }
 
-        $_SESSION['__credentials'] = [
-            'id' => $user['id'],
-            'email' => $user['email'],
-            'role' => $user['role'] ?? null
-        ];
+        static::login($credentials);
 
         return true;
 
+    }
+
+
+    public static function login($credentials)
+    {
+        if (empty($credentials)) {
+            return false;
+        }
+
+        Session::set('__credentials', [
+            'id' => $credentials['id'],
+            'email' => $credentials['email'],
+        ]);
+
+        session_regenerate_id(true);
+
+        return true;
+    }
+
+
+    public static function logout()
+    {
+        unset($_SESSION['__credentials']);
     }
 
 }
