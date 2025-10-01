@@ -21,3 +21,5 @@ Sep 29
 Sep 30
 
 - [x] Created Logout
+- [x] Created Request class
+- [x] Created Validator class

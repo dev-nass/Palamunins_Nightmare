@@ -32,8 +32,21 @@ class Validator
     public function email()
     {
 
-        if (!filter_var($this->data, FILTER_VALIDATE_EMAIL)) {
-            return $this->errors[$this->input_name][] = ucfirst("$this->mod_field_name must be a valid email");
+        $value = $this->data[$this->input_name] ?? null;
+
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            return ucfirst("{$this->mod_field_name} must be a valid email");
+        }
+
+        return true;
+    }
+
+
+    public function confirmed()
+    {
+
+        if ($this->data['password'] !== $this->data['password_confirmation']) {
+            return ucfirst("Password does not match");
         }
 
         return true;

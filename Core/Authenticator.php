@@ -27,12 +27,11 @@ class Authenticator
         ])->find();
 
         if (empty($user)) {
-
             Session::set('__flash', [
                 'email' => 'Account does not exist'
             ]);
 
-            return false;
+            return redirect($_SERVER['HTTP_REFERER']);
         }
 
 
@@ -41,7 +40,7 @@ class Authenticator
                 'password' => 'Incorrect password'
             ]);
 
-            return false;
+            return redirect($_SERVER['HTTP_REFERER']);
         }
 
         static::login($credentials);

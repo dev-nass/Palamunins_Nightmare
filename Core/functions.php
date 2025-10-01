@@ -25,6 +25,24 @@ function base_path($path)
 }
 
 
+function errors($input_name)
+{
+
+    $errors = $_SESSION['__flash']['errors'][$input_name];
+
+    if (empty($errors)) {
+        return;
+    }
+
+    echo "<p class='text-red-500 text-xs italic mt-2'>";
+    echo $errors[0];
+    echo "</p>";
+
+    return;
+}
+
+
+
 function view($path, $attributes = [])
 {
 

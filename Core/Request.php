@@ -44,12 +44,21 @@ class Request
             foreach (explode('|', $rule_set) as $rule) {
 
                 if ($rule === 'required') {
+                    $result = $validator->required();
                     if ($result !== true)
                         $errors[$input_name][] = $result;
                 }
 
                 if ($rule === 'email') {
-                    $errors[$input_name][] = $validator->email();
+                    $result = $validator->email();
+                    if ($result !== true)
+                        $errors[$input_name][] = $validator->email();
+                }
+
+                if ($rule === 'confirmed') {
+                    $result = $validator->confirmed();
+                    if ($result !== true)
+                        $errors[$input_name][] = $validator->confirmed();
                 }
             }
         }

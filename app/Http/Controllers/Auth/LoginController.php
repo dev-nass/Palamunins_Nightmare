@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use Core\Database;
-use Core\Session;
 use Core\Authenticator;
+use Core\Request;
 
 class LoginController
 {
@@ -23,13 +23,15 @@ class LoginController
 
     public function store()
     {
-        $credentials = array_merge($_POST);
 
-        $attempt = Authenticator::attempt($credentials);
+        $request = new Request();
 
-        if (!$attempt) {
-            return redirect('login');
-        }
+        $data = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        Authenticator::attempt($data);
 
         return redirect('homepage');
 

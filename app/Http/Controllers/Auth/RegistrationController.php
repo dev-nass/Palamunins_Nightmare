@@ -27,44 +27,17 @@ class RegistrationController extends Controller
 
         $request = new Request();
 
-        // $email = $this->request('email');
-        // $password = $this->request('password');
-        // $password_confirmation = $this->request('password_confirmation');
-
-        // $data = $this->request()->validate([
-        //     'email' => 'required|email'
-        // ]);
-
         $data = $request->validate([
-            'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'required|confirmed'
         ]);
-
-        dd($data);
-
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-            Session::set('__flash', [
-                'email' => 'Enter a valid email'
-            ]);
-
-            return redirect('registration');
-        }
-
-        if ($password !== $password_confirmation) {
-            Session::set('__flash', [
-                'password' => 'Password does not match'
-            ]);
-
-            return redirect('registration');
-        }
 
         $this->databas->query('INSERT INTO users (email, password) VALUE (:email, :password)', [
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_BCRYPT)
+            'email' => $data['email'],
+            'password' => password_hash($data['password'], PASSWORD_BCRYPT)
         ]);
 
-        return view('user/homepage.view.php');
+        return redirect('login');
 
     }
 }
