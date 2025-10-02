@@ -23,3 +23,7 @@ Sep 30
 - [x] Created Logout
 - [x] Created Request class
 - [x] Created Validator class
+
+Oct 2
+
+- [ ] No coding for todey, cramming my flashcards
